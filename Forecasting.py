@@ -22,6 +22,7 @@ def sACVF(series, h) :
     return (ss / length);
     
 
+#this algorithm is only valid for zero-mean stationary time series
 def DurbinLevinson(series = []) :
     arr = np.array(series, dtype=float);
     average = arr.mean();
@@ -60,6 +61,7 @@ def DurbinLevinson(series = []) :
     oldPHIs.append(phiArray[length]);
     
     result = 0.0;
+    oldPHIs.reverse();  #PnXn+1 = Phi[n1]Xn + Phi[n2]Xn-1 + ... + Phi[nn]X1`
     for i in range(length) :
         result += series[i] * oldPHIs[i];
         
